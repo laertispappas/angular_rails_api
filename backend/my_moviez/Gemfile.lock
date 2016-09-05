@@ -1,3 +1,8 @@
+PATH
+  remote: components
+  specs:
+    try_monad (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -156,6 +161,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
+  try_monad!
   tzinfo-data
 
 BUNDLED WITH
