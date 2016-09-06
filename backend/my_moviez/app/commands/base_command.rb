@@ -1,11 +1,14 @@
-class BaseCommand
+module BaseCommand
   attr_reader :result
 
-  class << self
-    # DoAuthentication.call(email, passwd)
+  module ClassMethods
     def call(*args)
       new(*args).call
     end
+  end
+
+  def self.prepended(base)
+    base.extend ClassMethods
   end
 
   def call

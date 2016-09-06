@@ -1,4 +1,6 @@
-class AuthorizeApiRequest < BaseCommand
+class AuthorizeApiRequest
+  prepend BaseCommand
+
   def initialize(header = {})
     @headers = headers
   end
