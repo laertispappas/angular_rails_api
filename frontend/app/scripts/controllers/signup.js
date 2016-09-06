@@ -12,10 +12,13 @@ angular.module('frontendApp')
     $scope.signup = function() {
       var payload = {
         email: $scope.email,
-        password: $scope.password
+        password: $scope.password,
+        password_confirmation: $scope.password_confirmation
       };
 
-      $http.get('/api/echo', payload).success(function(data) {
+      $http.post('/api/registrations', payload).success(function(data) {
+        $log.debug(data);
+      }).error(function(data) {
         $log.debug(data);
       });
     };
