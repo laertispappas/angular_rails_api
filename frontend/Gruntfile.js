@@ -75,22 +75,42 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+			proxies: [
+                {
+                    context: '/api',
+                    host: 'localhost',
+                    port: 3000,
+                    https: false,
+                    xforward: false,
+                    headers: {
+                        'x-custom-added-header': 1
+                    },
+                    hideHeaders: ['x-removed-header']
+                }
+      ],
       livereload: {
         options: {
           open: true,
           middleware: function (connect) {
-            return [
-              connect.static('.tmp'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
-              connect().use(
-                '/app/styles',
-                connect.static('./app/styles')
-              ),
-              connect.static(appConfig.app)
-            ];
+
+						var middlewares = [];
+
+								 // Setup the proxy
+								 middlewares.push(require('grunt-connect-proxy/lib/utils').proxyRequest);
+
+								 // Serve static files
+								 middlewares.push(connect.static('.tmp'));
+								 middlewares.push(connect().use(
+									 '/bower_components',
+									 connect.static('./bower_components')
+								 ));
+								 middlewares.push(connect().use(
+									 '/app/styles',
+									 connect.static('./app/styles')
+								 ));
+								 middlewares.push(connect.static(appConfig.app));
+
+								 return middlewares;
           }
         }
       },
@@ -220,7 +240,7 @@ module.exports = function (grunt) {
             }
           }
       }
-    }, 
+    },
 
     // Renames files for browser caching purposes
     filerev: {
@@ -437,6 +457,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'postcss:server',
+       'configureProxies:server',
       'connect:livereload',
       'watch'
     ]);
@@ -480,4 +501,6 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.loadNpmTasks('grunt-connect-proxy');
 };
