@@ -18,6 +18,11 @@ angular.module('frontendApp')
 
       $http.post('/api/registrations', payload).success(function(data) {
         $log.debug(data);
+        if(data.hasOwnProperty('success')) {
+
+          userService.username = $scope.email;
+          $location.path('/dashboard');
+        }
       }).error(function(data, status) {
         $log.debug(data);
         if(status === 422) {
