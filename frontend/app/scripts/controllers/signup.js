@@ -34,7 +34,7 @@ angular.module('frontendApp')
             }
           });
         }
-        if(status == 500) {
+        if(status === 500) {
           alertService.add('danger', 'Internal server error!');
         }
       });
