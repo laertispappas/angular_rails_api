@@ -6,6 +6,10 @@ class ApplicationController < ActionController::API
   end
   helper_method :current_user
 
+  def echo
+    head :ok
+  end
+
   private
   def authenticate_request
     @current_user = AuthorizeApiRequest.call(request.headers).result
