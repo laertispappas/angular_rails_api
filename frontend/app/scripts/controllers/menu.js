@@ -9,7 +9,7 @@
  */
 angular.module('frontendApp')
   .controller('MenuCtrl', function ($scope, $http, userService, $location) {
-    $scope.user = UserService;
+    $scope.user = userService;
 
     $scope.logout = function() {
       $http.get('/app/logout').success(function(data){
