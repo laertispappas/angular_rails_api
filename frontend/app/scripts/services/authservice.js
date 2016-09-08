@@ -8,7 +8,7 @@
  * Service in the frontendApp.
  */
 angular.module('frontendApp')
-  .service('authService', function () {
+  .service('authService', function ($window, $log) {
     var self = this;
     self.parseJwt = function(token){
       var base64Url = token.split('.')[1];
@@ -18,10 +18,12 @@ angular.module('frontendApp')
     }
 
     self.saveToken = function(token){
+      $log.debug("Saving token: " + token);
       $window.localStorage['jwtToken'] = token;
     }
 
     self.getToken = function() {
+      $log.debug("Getting token: " + $window.localStorage['jwtToken'])
       return $window.localStorage['jwtToken'];
     }
 

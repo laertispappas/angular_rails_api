@@ -49,5 +49,6 @@ module BaseCommand
         self[field].each { |msg| yield field, msg }
       end
     end
+
   end
 end
