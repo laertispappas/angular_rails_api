@@ -36,7 +36,7 @@ angular.module('frontendApp')
          password : this.password
        };
 
-       $http.post('/app/login', payload)
+       $http.post('/api/sessions', payload)
            .error(function(data, status){
              if(status === 400) {
                angular.forEach(data, function(value, key) {
@@ -56,10 +56,10 @@ angular.module('frontendApp')
            })
            .success(function(data){
              $log.debug(data);
-             if(data.hasOwnProperty('success')) {
-               userService.username = data.success.user;
+             //if(data.hasOwnProperty('success')) {
+               //userService.username = data.success.user;
                $location.path('/dashboard');
-             }
+             //}
            });
      };
   });

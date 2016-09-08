@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     end
   end
   scope :api, defaults: { format: 'json' } do
-    post 'authenticate', to: 'authentication#authenticate'
+    resources :sessions, only: [:create, :destroy]
     resources :registrations, only: [:create, :destroy]
   end
 end
