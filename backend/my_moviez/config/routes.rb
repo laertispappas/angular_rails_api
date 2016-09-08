@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
+      get :echo, to: 'movies#echo'
       resources :movies, only: [:index, :show]
       resources :actors, only: [:index, :show]
       resources :users, only: [:index, :show]

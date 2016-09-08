@@ -6,7 +6,6 @@ module Api
       def current_user
         @current_user ||= unauthorized!
       end
-      helper_method :current_user
 
       def echo
         head :ok
