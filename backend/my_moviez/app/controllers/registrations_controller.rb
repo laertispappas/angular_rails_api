@@ -2,7 +2,8 @@ class RegistrationsController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      render json: user, status: :created
+      command = AuthenticateUser.call(params[:email], params[:password])
+      render json: { auth_token: command.result }, status: :created
     else
       render json: user.errors.messages, status: :unprocessable_entity
     end

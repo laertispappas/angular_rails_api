@@ -9,19 +9,22 @@
  */
 angular.module('frontendApp')
   .controller('SignupCtrl', function ($scope, $http, $log, alertService, $location, userService) {
+    function handleRequest(res) {
+      $log.debug(res);
+      var token = res.data ? res.data.auth_token : null;
+      if(token) {
+        console.log('JWT:', token);
+        $location.path('/dashboard');
+      }
+    }
+
     $scope.signup = function() {
       var payload = {
         email: $scope.email,
         password: $scope.password,
         password_confirmation: $scope.password_confirmation
       };
-
-      $http.post('/api/registrations', payload).success(function(data) {
-        $log.debug(data);
-          //if(data.hasOwnProperty('success')) {
-          userService.username = $scope.email;
-          $location.path('/dashboard');
-      }).error(function(data, status) {
+      userService.register(payload).then(handleRequest, function(data){
         $log.debug(data);
         if(status === 422) {
           angular.forEach(data, function(value, key) {
@@ -36,5 +39,6 @@ angular.module('frontendApp')
           alertService.add('danger', 'Internal server error!');
         }
       });
-    };
+    } // End signup
+
   });

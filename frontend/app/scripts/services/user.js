@@ -8,10 +8,26 @@
  * Service in the frontendApp.
  */
 angular.module('frontendApp')
-  .factory('userService', function () {
-    var username = '';
+  .factory('userService', function ($http) {
+    var self = this;
+
+    self.register = function(payload) {
+      return $http.post('api/registrations', {
+        email: payload.email,
+        password: payload.password,
+        password_confirmation: payload.password_confirmation
+      })
+    }
+
+    self.login = function(email, password) {
+      return $http.post('api/sessions', {
+        email: email,
+        password: password
+      })
+    }
 
     return {
-      username: username
-    };
+      login: self.login,
+      register: self.register
+    }
   });
