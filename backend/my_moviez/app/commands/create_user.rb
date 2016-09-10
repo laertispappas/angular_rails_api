@@ -7,12 +7,11 @@ class CreateUser
 
   def call
     user = User.new(@user_params)
-    if user.save
-      JsonWebToken.encode(user_id: user.id)
-    else
-      errors.add :user_authentication, 'invalid credentials'
-      false
-    end
+    user.save ? user : add_errors && false
   end
 
+  private
+  def add_errors
+    errors.add :user_authentication, 'invalid credentials'
+  end
 end

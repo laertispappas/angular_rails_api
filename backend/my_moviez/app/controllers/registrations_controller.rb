@@ -2,7 +2,7 @@ class RegistrationsController < ApplicationController
   def create
     command = CreateUser.call(user_params)
     if command.success?
-      render json: { auth_token: command.result }, status: :created
+      render json: command.result, status: :created
     else
       render json: command.errors, status: :unprocessable_entity
     end
