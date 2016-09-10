@@ -24,12 +24,12 @@ ActiveRecord::Schema.define(version: 20160910230205) do
 
   create_table "context_conditions", force: :cascade do |t|
     t.integer "context_id", null: false
-    t.string  "condition"
+    t.string  "name"
     t.index ["context_id"], name: "index_context_conditions_on_context_id"
   end
 
   create_table "contexts", force: :cascade do |t|
-    t.string "type", null: false
+    t.string "name", null: false
   end
 
   create_table "countries", force: :cascade do |t|
