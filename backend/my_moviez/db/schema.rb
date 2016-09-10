@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160910222759) do
+ActiveRecord::Schema.define(version: 20160910223313) do
 
   create_table "cities", force: :cascade do |t|
     t.integer "state_id", null: false
@@ -23,6 +23,12 @@ ActiveRecord::Schema.define(version: 20160910222759) do
     t.string "name", limit: 50, null: false
     t.index ["code"], name: "index_countries_on_code"
     t.index ["name"], name: "index_countries_on_name"
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "states", force: :cascade do |t|
