@@ -10,7 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160905203231) do
+ActiveRecord::Schema.define(version: 20160910214700) do
+
+  create_table "cities", force: :cascade do |t|
+    t.integer "state_id", null: false
+    t.string  "name",     null: false
+    t.index ["state_id"], name: "index_cities_on_state_id"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "code", limit: 4,  null: false
+    t.string "name", limit: 50, null: false
+    t.index ["code"], name: "index_countries_on_code"
+    t.index ["name"], name: "index_countries_on_name"
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.integer "country_id",             null: false
+    t.string  "code",       limit: 4,   null: false
+    t.string  "name",       limit: 100, null: false
+    t.index ["code"], name: "index_states_on_code"
+    t.index ["country_id"], name: "index_states_on_country_id"
+    t.index ["name"], name: "index_states_on_name"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
