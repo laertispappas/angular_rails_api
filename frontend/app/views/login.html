@@ -1,15 +1,2 @@
-<h3>Login</h3>
-<form name="loginForm" ng-submit="login()" novalidate>
-  <div>
-    <label for="email">Email</label>
-    <input name="email" class="form-control" type="email" id="email" placeholder="Email"
-    ng-model="email">
-  </div>
-  <div>
-    <label for="password">Password</label>
-    <input name="password" class="form-control" type="password" id="password"
-    placeholder="Password" ng-model="password">
-
-  </div>
-  <button type="submit" class="btn btn-primary">Log in</button>
-</form>
+<p><a class="btn btn-lg btn-success" ng-click="echo()">Authorized Echo request<span class="glyphicon glyphicon-ok"></span></a></p>
+<ng-include src="'views/directives/login-form.html'"></ng-include>

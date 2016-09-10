@@ -13,6 +13,7 @@ angular.module('frontendApp')
     $scope.currentUser = null;
     $scope.userRoles = USER_ROLES;
     $scope.isAuthorized = authService.isAuthorized;
+    $scope.isLoginPage = false;
 
     $scope.isAuthed = function() {
       return authService.isAuthenticated();

@@ -53,7 +53,8 @@ angular
       });
   })
   .run(function($rootScope, AUTH_EVENTS, authService){
-    console.log("Inside Tun");
+    // Get user data here by hitting /api/v1/profile to get
+    // user data on refresh
     $rootScope.$on('$stateChangeStart', function (event, next) {
       var authorizedRoles = next.data.authorizedRoles;
       if (!authService.isAuthorized(authorizedRoles)) {

@@ -20,6 +20,8 @@ angular.module('frontendApp')
       //self.message = res.data.message;
     }
 
+    $scope.isLoginPage = true;
+
      $scope.login = function() {
       userService.login(this.email, this.password).then(handleRequest, function(data){
           $log.debug(data);
