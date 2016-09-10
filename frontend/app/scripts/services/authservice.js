@@ -43,4 +43,13 @@ angular.module('frontendApp')
       $log.debug("Removing token: " + $window.localStorage['jwtToken']);
       $window.localStorage.removeItem('jwtToken');
     }
+
+    self.isAuthorized = function(authorizedRoles) {
+      if (!angular.isArray(authorizedRoles)) {
+        authorizedRoles = [authorizedRoles];
+      }
+
+      return (authService.isAuthenticated() &&
+            authorizedRoles.indexOf(Session.userRole) !== -1);
+    }
   });

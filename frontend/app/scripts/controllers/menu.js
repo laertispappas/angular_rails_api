@@ -11,5 +11,6 @@ angular.module('frontendApp')
   .controller('MenuCtrl', function ($scope, $http, authService, $location, $log) {
     $scope.logout = function() {
       authService.logout()
+      $scope.setCurrentUser(null);
     }
   });

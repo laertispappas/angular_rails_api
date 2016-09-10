@@ -21,7 +21,7 @@ angular
   .config(function($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
   })
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, USER_ROLES) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -43,9 +43,26 @@ angular
       })
       .when('/dashboard', {
         templateUrl: 'views/dashboard.html',
-        controller: 'DashboardCtrl'
+        controller: 'DashboardCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.member]
+        }
       })
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .run(function($rootScope, AUTH_EVENTS, authService){
+    console.log("Inside Tun");
+    $rootScope.$on('$stateChangeStart', function (event, next) {
+      var authorizedRoles = next.data.authorizedRoles;
+      if (!authService.isAuthorized(authorizedRoles)) {
+        event.preventDefault();
+        if (authService.isAuthenticated()) {
+          $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+        } else {
+          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+        }
+      }
+    });
   });

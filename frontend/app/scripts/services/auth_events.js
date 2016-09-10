@@ -16,3 +16,10 @@ angular.module('frontendApp')
     notAuthenticated: 'auth-not-authenticated',
     notAuthorized: 'auth-not-authorized'
   })
+  .constant('USER_ROLES', {
+    all: '*',
+    admin: 'admin',
+    member: 'member',
+    editor: 'editor',
+    guest: 'guest'
+  })
