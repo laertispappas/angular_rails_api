@@ -8,9 +8,8 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('ApplicationCtrl', function ($scope, $http, authService, USER_ROLES) {
+  .controller('ApplicationCtrl', function ($scope, $rootScope,$http, authService, USER_ROLES) {
 
-    $scope.currentUser = null;
     $scope.userRoles = USER_ROLES;
     $scope.isAuthorized = authService.isAuthorized;
     $scope.isLoginPage = false;

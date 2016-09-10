@@ -49,7 +49,7 @@ angular.module('frontendApp')
         authorizedRoles = [authorizedRoles];
       }
 
-      return (self.isAuthenticated() &&
-            authorizedRoles.indexOf(Session.userRole) !== -1);
+      return (self.isAuthenticated()); //&&
+            //authorizedRoles.indexOf(Session.userRole) !== -1);
     }
   });

@@ -26,8 +26,13 @@ angular.module('frontendApp')
       })
     }
 
+    self.getProfile = function() {
+      return $http.get('api/v1/profile')
+    }
+
     return {
       login: self.login,
-      register: self.register
+      register: self.register,
+      getProfile: self.getProfile
     }
   });

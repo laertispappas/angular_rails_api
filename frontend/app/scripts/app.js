@@ -52,9 +52,13 @@ angular
         redirectTo: '/'
       });
   })
-  .run(function($rootScope, AUTH_EVENTS, authService){
-    // Get user data here by hitting /api/v1/profile to get
-    // user data on refresh
+  .run(function($rootScope, AUTH_EVENTS, authService, userService){
+    // get user profile on page refresh
+    userService.getProfile().then(function(response){
+      $rootScope.currentUser = response.data;
+    }, function(data){
+      console.log("Error getting user profile");
+    })
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
       if (next.data && next.data.authorizedRoles) {
         var authorizedRoles = next.data.authorizedRoles;
