@@ -54,11 +54,13 @@ angular
   })
   .run(function($rootScope, AUTH_EVENTS, authService, userService){
     // get user profile on page refresh
-    userService.getProfile().then(function(response){
-      $rootScope.currentUser = response.data;
-    }, function(data){
-      console.log("Error getting user profile");
-    })
+    if(authService.isAuthenticated()) {
+      userService.getProfile().then(function(response){
+        $rootScope.currentUser = response.data;
+      }, function(data){
+        console.log("Error getting user profile");
+      })
+    }
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
       if (next.data && next.data.authorizedRoles) {
         var authorizedRoles = next.data.authorizedRoles;
