@@ -19,18 +19,15 @@ angular.module('frontendApp')
     }
 
     self.saveToken = function(token){
-      $log.debug("Saving token: " + token);
       $window.localStorage['jwtToken'] = token;
     }
 
     self.getToken = function() {
-      $log.debug("Getting token: " + $window.localStorage['jwtToken'])
       return $window.localStorage['jwtToken'];
     }
 
     self.isAuthenticated = function() {
       var token = self.getToken();
-      $log.debug("IsAuthenticated token: " + token);
       if(token) {
         var params = self.parseJwt(token);
         return Math.round(new Date().getTime() / 1000) <= params.exp;
@@ -40,7 +37,6 @@ angular.module('frontendApp')
     }
 
     self.logout = function() {
-      $log.debug("Removing token: " + $window.localStorage['jwtToken']);
       $window.localStorage.removeItem('jwtToken');
     }
 
