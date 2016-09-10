@@ -13,6 +13,7 @@ angular.module('frontendApp')
       var token = res.data ? res.data.auth_token : null;
       if(token) {
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+        $scope.setCurrentUser(res.data);
         console.log('JWT:', token);
         $location.path('/dashboard');
       }

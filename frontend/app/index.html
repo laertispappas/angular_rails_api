@@ -41,8 +41,8 @@
               <li><a ng-href="/#/signup">Sign up!</a></li>
               <li><a ng-href="/#/login">Login</a></li>
             </ul>
-            <div class="btn-group pull-right acc-button" ng-show="isAuthed()">
-              <button type="button" class="btn btn-default">{{ username }}</button>
+            <div class="btn-group pull-right acc-button" ng-if="isAuthed()">
+              <button type="button" class="btn btn-default">{{ currentUser.email }}</button>
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                 aria-expanded="false">
                 <span class="caret"></span>
