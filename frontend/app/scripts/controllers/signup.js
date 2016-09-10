@@ -8,11 +8,14 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('SignupCtrl', function ($scope, $http, $log, alertService, $location, userService) {
+  .controller('SignupCtrl', function ($scope, $rootScope, $http, $log, alertService, $location, userService, AUTH_EVENTS) {
     function handleRequest(res) {
       $log.debug(res);
       var token = res.data ? res.data.auth_token : null;
       if(token) {
+        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+        $scope.setCurrentUser(res.data);
+
         console.log('JWT:', token);
         $location.path('/dashboard');
       }
