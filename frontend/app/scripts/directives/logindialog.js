@@ -14,6 +14,8 @@ angular.module('frontendApp')
       //template: '<div ng-if="visible" ng-include="\'views/directives/login-form.html\'">',
       link: function (scope) {
         var showLoginDialog = function(){
+          scope.isLoginDialogVisible = true;
+
           scope.modalInstance = $uibModal.open({
             animation: false,
             ariaLabelledBy: 'modal-title',
@@ -28,9 +30,12 @@ angular.module('frontendApp')
         };
 
         scope.closeLoginDialog = function (){
-          scope.modalInstance.close();
+          if(scope.isLoginDialogVisible == true) {
+            scope.modalInstance.close();
+          }
         }
 
+        scope.isLoginDialogVisible = false;
         scope.$on(AUTH_EVENTS.notAuthenticated, showLoginDialog);
         scope.$on(AUTH_EVENTS.sessionTimeout, showLoginDialog)
         scope.$on(AUTH_EVENTS.loginSuccess, scope.closeLoginDialog)
