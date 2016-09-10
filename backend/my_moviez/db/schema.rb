@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160910214700) do
+ActiveRecord::Schema.define(version: 20160910222759) do
 
   create_table "cities", force: :cascade do |t|
     t.integer "state_id", null: false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20160910214700) do
     t.date     "birthday"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "city_id"
     t.index ["email"], name: "index_users_on_email"
   end
 
