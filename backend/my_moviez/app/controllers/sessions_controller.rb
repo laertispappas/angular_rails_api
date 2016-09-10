@@ -7,7 +7,4 @@ class SessionsController < ApplicationController
       render json: { error: command.errors }, status: :unauthorized
     end
   end
-
-  def destroy
-  end
 end

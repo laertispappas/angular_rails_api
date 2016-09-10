@@ -8,11 +8,6 @@ class RegistrationsController < ApplicationController
     end
   end
 
-  def destroy
-    User.find(params[:id]).destroy
-    head :ok
-  end
-
   private
   def user_params
     params.permit(:email, :password, :password_confirmation)
