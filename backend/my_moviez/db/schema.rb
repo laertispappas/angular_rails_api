@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160910222759) do
+ActiveRecord::Schema.define(version: 20160910230205) do
+
+  create_table "actors", force: :cascade do |t|
+    t.string "name", null: false
+  end
 
   create_table "cities", force: :cascade do |t|
     t.integer "state_id", null: false
@@ -18,11 +22,45 @@ ActiveRecord::Schema.define(version: 20160910222759) do
     t.index ["state_id"], name: "index_cities_on_state_id"
   end
 
+  create_table "context_conditions", force: :cascade do |t|
+    t.integer "context_id", null: false
+    t.string  "condition"
+    t.index ["context_id"], name: "index_context_conditions_on_context_id"
+  end
+
+  create_table "contexts", force: :cascade do |t|
+    t.string "type", null: false
+  end
+
   create_table "countries", force: :cascade do |t|
     t.string "code", limit: 4,  null: false
     t.string "name", limit: 50, null: false
     t.index ["code"], name: "index_countries_on_code"
     t.index ["name"], name: "index_countries_on_name"
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.integer "movie_id", null: false
+    t.string  "name",     null: false
+    t.index ["movie_id"], name: "index_genres_on_movie_id"
+    t.index ["name"], name: "index_genres_on_name"
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string "title", null: false
+    t.index ["title"], name: "index_movies_on_title"
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "context_id",           null: false
+    t.integer  "movie_id",             null: false
+    t.integer  "user_id",              null: false
+    t.integer  "score",      limit: 1, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["context_id"], name: "index_ratings_on_context_id"
+    t.index ["movie_id"], name: "index_ratings_on_movie_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "states", force: :cascade do |t|
