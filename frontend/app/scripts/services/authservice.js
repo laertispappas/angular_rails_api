@@ -10,6 +10,7 @@
 angular.module('frontendApp')
   .service('authService', function ($window, $log) {
     var self = this;
+
     self.parseJwt = function(token){
       var base64Url = token.split('.')[1];
       var base64 = base64Url.replace('-', '+').replace('_', '/');
@@ -29,6 +30,7 @@ angular.module('frontendApp')
 
     self.isAuthenticated = function() {
       var token = self.getToken();
+      $log.debug("IsAuthenticated token: " + token);
       if(token) {
         var params = self.parseJwt(token);
         return Math.round(new Date().getTime() / 1000) <= params.exp;
@@ -38,6 +40,7 @@ angular.module('frontendApp')
     }
 
     self.logout = function() {
+      $log.debug("Removing token: " + $window.localStorage['jwtToken']);
       $window.localStorage.removeItem('jwtToken');
     }
   });

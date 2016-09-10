@@ -8,10 +8,11 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('LoginCtrl', function ($scope, userService, $location, $log, $http, alertService) {
+  .controller('LoginCtrl', function ($scope, userService, $rootScope, AUTH_EVENTS, $location, $log, $http, alertService) {
     function handleRequest(res) {
       var token = res.data ? res.data.auth_token : null;
       if(token) {
+        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
         console.log('JWT:', token);
         $location.path('/dashboard');
       }
@@ -22,6 +23,7 @@ angular.module('frontendApp')
       userService.login(this.email, this.password).then(handleRequest, function(data){
           $log.debug(data);
           status = data.status;
+          $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
           if(status === 400) {
             angular.forEach(data, function(value, key) {
               if(key === 'email' || key === 'password') {

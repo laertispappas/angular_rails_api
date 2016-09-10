@@ -9,7 +9,7 @@
  */
 angular.module('frontendApp')
   .controller('MenuCtrl', function ($scope, $http, authService, $location, $log) {
-    self.logout = function() {
-      auth.logout && auth.logout()
+    $scope.logout = function() {
+      authService.logout()
     }
   });

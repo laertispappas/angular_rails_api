@@ -4,7 +4,7 @@ module Api
       before_action :authenticate_request
 
       def current_user
-        @current_user ||= unauthorized!
+        @current_user
       end
 
       def echo
