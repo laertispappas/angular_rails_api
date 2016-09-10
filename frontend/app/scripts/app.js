@@ -55,14 +55,16 @@ angular
   .run(function($rootScope, AUTH_EVENTS, authService){
     // Get user data here by hitting /api/v1/profile to get
     // user data on refresh
-    $rootScope.$on('$stateChangeStart', function (event, next) {
-      var authorizedRoles = next.data.authorizedRoles;
-      if (!authService.isAuthorized(authorizedRoles)) {
-        event.preventDefault();
-        if (authService.isAuthenticated()) {
-          $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-        } else {
-          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+    $rootScope.$on('$routeChangeStart', function (event, next, current) {
+      if (next.data && next.data.authorizedRoles) {
+        var authorizedRoles = next.data.authorizedRoles;
+        if (!authService.isAuthorized(authorizedRoles)) {
+          event.preventDefault();
+          if (authService.isAuthenticated()) {
+            $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+          } else {
+            $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+          }
         }
       }
     });
