@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :movies, only: [:index, :show]
       resources :actors, only: [:index, :show]
       resources :users, only: [:index, :show]
+      get :profile, to: 'profiles#show'
     end
   end
   scope :api, defaults: { format: 'json' } do

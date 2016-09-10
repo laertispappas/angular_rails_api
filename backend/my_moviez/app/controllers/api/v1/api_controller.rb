@@ -3,6 +3,8 @@ module Api
     class ApiController < ApplicationController
       before_action :authenticate_request
 
+      protected
+
       def current_user
         @current_user
       end
