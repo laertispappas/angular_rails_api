@@ -13,9 +13,13 @@ CONTEXT_CONDITIONS = {
 }
 
 
+# Persist Context Variables in DB
 CONTEXT_CONDITIONS.each do |context, conditions|
   context = Context.find_or_create_by!(name: context)
   conditions.each do |cond_name|
     context.conditions.find_or_create_by!(name: cond_name)
   end
 end
+
+
+# Parse LDOS-CoMoData and persist
