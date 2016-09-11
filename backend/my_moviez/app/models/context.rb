@@ -1,3 +1,3 @@
 class Context < ApplicationRecord
-  has_many :conditions, class_name: 'ContextCondition'
+  has_many :conditions, class_name: 'ContextCondition', dependent: :destroy
 end

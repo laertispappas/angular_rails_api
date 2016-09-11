@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160910230205) do
+ActiveRecord::Schema.define(version: 20160912173801) do
 
   create_table "actors", force: :cascade do |t|
     t.string "name", null: false
@@ -24,8 +24,17 @@ ActiveRecord::Schema.define(version: 20160910230205) do
 
   create_table "context_conditions", force: :cascade do |t|
     t.integer "context_id", null: false
-    t.string  "name"
+    t.string  "name",       null: false
     t.index ["context_id"], name: "index_context_conditions_on_context_id"
+  end
+
+  create_table "context_ratings", force: :cascade do |t|
+    t.integer  "rating_id",  null: false
+    t.integer  "context_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["context_id"], name: "index_context_ratings_on_context_id"
+    t.index ["rating_id"], name: "index_context_ratings_on_rating_id"
   end
 
   create_table "contexts", force: :cascade do |t|
@@ -40,25 +49,40 @@ ActiveRecord::Schema.define(version: 20160910230205) do
   end
 
   create_table "genres", force: :cascade do |t|
-    t.integer "movie_id", null: false
-    t.string  "name",     null: false
-    t.index ["movie_id"], name: "index_genres_on_movie_id"
+    t.string "name", null: false
     t.index ["name"], name: "index_genres_on_name"
   end
 
+  create_table "movie_actors", force: :cascade do |t|
+    t.integer "movie_id"
+    t.integer "actor_id"
+    t.index ["actor_id"], name: "index_movie_actors_on_actor_id"
+    t.index ["movie_id"], name: "index_movie_actors_on_movie_id"
+  end
+
+  create_table "movie_genres", force: :cascade do |t|
+    t.integer "movie_id"
+    t.integer "genre_id"
+    t.index ["genre_id"], name: "index_movie_genres_on_genre_id"
+    t.index ["movie_id"], name: "index_movie_genres_on_movie_id"
+  end
+
   create_table "movies", force: :cascade do |t|
-    t.string "title", null: false
+    t.string "title",    null: false
+    t.string "director"
+    t.string "country"
+    t.string "language"
+    t.string "year"
+    t.string "budget"
     t.index ["title"], name: "index_movies_on_title"
   end
 
   create_table "ratings", force: :cascade do |t|
-    t.integer  "context_id",           null: false
     t.integer  "movie_id",             null: false
     t.integer  "user_id",              null: false
     t.integer  "score",      limit: 1, null: false
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
-    t.index ["context_id"], name: "index_ratings_on_context_id"
     t.index ["movie_id"], name: "index_ratings_on_movie_id"
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
