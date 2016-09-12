@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   has_many :ratings, dependent: :destroy
   has_many :rated_movies, through: :ratings, class_name: 'Movie', source: :movie
-  belongs_to :city
+  belongs_to :city, optional: true
 
   validates :email, uniqueness: { case_sensitive: false }
   validates :password, presence: true
