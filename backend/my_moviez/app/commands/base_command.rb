@@ -31,6 +31,10 @@ module BaseCommand
     @errors ||= Error.new
   end
 
+  def errors=(other)
+    @errors = other
+  end
+
   private
 
   def called?

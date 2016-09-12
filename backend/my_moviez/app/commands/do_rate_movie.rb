@@ -2,17 +2,23 @@ class DoRateMovie
   prepend BaseCommand
   attr_reader :rating
 
-  def initialize(movie, user)
+  def initialize(movie, user, context_conditions = {})
     @movie = movie
     @user = user
+    @context_conditions = context_conditions
   end
 
   def call
-    if @user.has_rated?(@movie)
+    rating.save ? rating : errors = rating.errors
+  end
 
-    else
-      rating = @user.ratings.build(movie: @movie)
-      rating.valid? ? @rating : errors.from_hash(rating.errors.messages)
-    end
+
+  private
+  def rating
+    @rating ||= begin
+                  r = Rating.find_or_initialize_by(user: @user, movie: @movie)
+                  r.rating_conditions.build
+                  r
+                end
   end
 end
