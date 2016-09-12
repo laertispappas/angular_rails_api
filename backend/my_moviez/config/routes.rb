@@ -6,7 +6,6 @@ Rails.application.routes.draw do
       get :echo, to: 'movies#echo'
       resources :movies, only: [:index, :show]
       resources :actors, only: [:index, :show]
-      resources :users, only: [:index, :show]
       get :profile, to: 'profiles#show'
 
     end

@@ -15,7 +15,7 @@ module Api
 
       private
       def authenticate_request
-        @current_user = AuthorizeApiRequest.call(request.headers).result
+        @current_user ||= AuthorizeApiRequest.call(request.headers).result
         unauthorized! unless @current_user
       end
 
