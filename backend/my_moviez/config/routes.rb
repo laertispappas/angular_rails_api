@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       get :echo, to: 'movies#echo'
-      resources :movies, only: [:index, :show]
+      resources :movies, only: [:index, :show] do
+        resources :ratings, only: [:create]
+      end
       resources :actors, only: [:index, :show]
       get :profile, to: 'profiles#show'
 

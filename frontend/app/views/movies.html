@@ -18,8 +18,12 @@
         <h3>{{ movie.title }}</h3>
         <p>Some text bla bla bla</p>
         <p>
-          <a href="#" class="btn btn-primary" role="button">Button</a>
-          <a href="#" class="btn btn-default" role="button">Button</a>
+          <span uib-rating ng-model="movie.current_user_score" max="5" read-only="isReadonly" ng-click="updateRating(movie)" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three', 'four', 'five']"a aria-labelledby="default-rating"></span>
+          <span>(Avg: {{ movie.total_score }})</span>
+          <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+        </p>
+        <p>
+          Other
         </p>
       </div>
     </div>

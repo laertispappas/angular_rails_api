@@ -7,7 +7,7 @@ module Api
 
       # GET api/v1/movies
       def index
-        render json: Movie.all
+        render json: Movie.all[0..50]
       end
 
       # GET api/v1/movies/:id

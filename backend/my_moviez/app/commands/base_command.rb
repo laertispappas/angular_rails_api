@@ -38,6 +38,9 @@ module BaseCommand
   end
 
   class Error < Hash
+    def from_hash(h = {})
+      h.each { |k, v| add(k, v) }
+    end
     def add(key, value, opts = {})
       self[key] ||= []
       self[key] << value

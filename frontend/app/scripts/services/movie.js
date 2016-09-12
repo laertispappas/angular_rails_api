@@ -15,7 +15,15 @@ angular.module('frontendApp')
       return $http.get('api/v1/movies')
     }
 
+    self.rate = function(data) {
+      var payload = {
+        score: data.score
+      };
+      return $http.post('api/v1/movies/:id/ratings'.replace(':id', data.id), payload)
+    }
+
     return {
-      index: self.index
+      index: self.index,
+      rate: self.rate
     };
   });

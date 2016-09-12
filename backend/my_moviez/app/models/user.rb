@@ -7,4 +7,12 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: { case_sensitive: false }
   validates :password, presence: true
+
+  def score_for(movie)
+    ratings.where(movie: movie).first.try(:score)
+  end
+
+  def has_rated?(movie)
+    Rating.exists?(movie: movie, user: self)
+  end
 end
