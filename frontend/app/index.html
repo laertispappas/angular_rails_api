@@ -58,6 +58,9 @@
                 </ul>
               </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right" ng-if="isAuthed()">
+              <li><a ng-href="/#/movies">Movies</a></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -119,6 +122,8 @@
         <script src="scripts/services/authinterceptor.js"></script>
         <script src="scripts/services/session.js"></script>
         <script src="scripts/directives/logindialog.js"></script>
+        <script src="scripts/controllers/movies.js"></script>
+        <script src="scripts/services/movie.js"></script>
         <!-- endbuild -->
 
         <div login-dialog ng-if="!isLoginPage"></div>
