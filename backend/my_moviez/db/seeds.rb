@@ -144,7 +144,7 @@ CSV.foreach(ratings_file, headers: true) do |row|
     context = Context.find_or_create_by!(name: type)
     condition = context.conditions.find_or_create_by!(name: ctx_condition)
 
-    rating.context_ratings.build(context: context)
+    rating.rating_conditions.build(condition: condition)
   end
   rating.save!
 
