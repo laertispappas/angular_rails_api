@@ -114,7 +114,7 @@ CSV.foreach(ratings_file, headers: true) do |row|
   movie.director = movies[item_id][:director]
   movie.country = movies[item_id][:country]
   movie.language = movies[item_id][:language]
-  movie.language = movies[item_id][:budget]
+  movie.budget = movies[item_id][:budget]
   movie.save!
 
   movie.genres.find_or_create_by!(name: movies[item_id][:genre1])

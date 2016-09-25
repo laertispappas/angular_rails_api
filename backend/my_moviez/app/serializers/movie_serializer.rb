@@ -8,4 +8,8 @@ class MovieSerializer < ActiveModel::Serializer
   def current_user_score
     scope.score_for(object)
   end
+
+  def context_conditions
+    Condition.all
+  end
 end
